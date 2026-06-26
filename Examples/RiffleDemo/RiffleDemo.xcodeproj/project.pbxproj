@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF5CBDCD2FEC4B6D00E0C4C7 /* Riffle in Frameworks */ = {isa = PBXBuildFile; productRef = AF5CBDCC2FEC4B6D00E0C4C7 /* Riffle */; };
 		AFCA64802FEC54E700BB70EA /* Riffle in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA647F2FEC54E700BB70EA /* Riffle */; };
+		AFCA648B2FEF1AC500BB70EA /* Riffle in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA648A2FEF1AC500BB70EA /* Riffle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			files = (
 				AFCA64802FEC54E700BB70EA /* Riffle in Frameworks */,
 				AF5CBDCD2FEC4B6D00E0C4C7 /* Riffle in Frameworks */,
+				AFCA648B2FEF1AC500BB70EA /* Riffle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +82,7 @@
 			packageProductDependencies = (
 				AF5CBDCC2FEC4B6D00E0C4C7 /* Riffle */,
 				AFCA647F2FEC54E700BB70EA /* Riffle */,
+				AFCA648A2FEF1AC500BB70EA /* Riffle */,
 			);
 			productName = RiffleDemo;
 			productReference = 100000000000000000000A6 /* RiffleDemo.app */;
@@ -111,7 +114,7 @@
 			mainGroup = 100000000000000000000A2;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				AFCA647E2FEC54E700BB70EA /* XCLocalSwiftPackageReference "../../../Riffle" */,
+				AFCA64892FEF1AC500BB70EA /* XCRemoteSwiftPackageReference "Riffle" */,
 			);
 			productRefGroup = 100000000000000000000A3 /* Products */;
 			projectDirPath = "";
@@ -324,12 +327,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		AFCA647E2FEC54E700BB70EA /* XCLocalSwiftPackageReference "../../../Riffle" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../Riffle;
+/* Begin XCRemoteSwiftPackageReference section */
+		AFCA64892FEF1AC500BB70EA /* XCRemoteSwiftPackageReference "Riffle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kempsu/Riffle.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		AF5CBDCC2FEC4B6D00E0C4C7 /* Riffle */ = {
@@ -338,6 +345,11 @@
 		};
 		AFCA647F2FEC54E700BB70EA /* Riffle */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Riffle;
+		};
+		AFCA648A2FEF1AC500BB70EA /* Riffle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFCA64892FEF1AC500BB70EA /* XCRemoteSwiftPackageReference "Riffle" */;
 			productName = Riffle;
 		};
 /* End XCSwiftPackageProductDependency section */

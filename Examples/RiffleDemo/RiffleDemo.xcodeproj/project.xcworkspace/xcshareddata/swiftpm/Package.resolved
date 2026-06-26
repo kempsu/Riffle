@@ -1,0 +1,15 @@
+{
+  "originHash" : "5cb8de05fbfa8af8eb0942197dc56a4a89389255319a06cb06011c2bd8db9b10",
+  "pins" : [
+    {
+      "identity" : "riffle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kempsu/Riffle.git",
+      "state" : {
+        "revision" : "912cc450300ac7d173a98bfdfce4e3359326db8e",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
