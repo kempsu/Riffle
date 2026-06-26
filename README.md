@@ -222,6 +222,14 @@ Planned for later releases:
 - A horizontal transition option and a configurable swipe axis.
 - Relevance signals beyond static priority, such as recency and last-shown time — closing the loop on true Smart Rotate.
 
+## More from Appgineering
+
+If Riffle is useful to you, check out our other apps:
+
+- [Appgineering on the App Store](https://apps.apple.com/us/developer/appgineering-gbr/id1785233826)
+- [appgineering.com](https://appgineering.com)
+- [neitola.dev](https://neitola.dev) — the maintainer's personal site
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
