@@ -1,0 +1,31 @@
+name: Release
+
+# Cut a release by pushing a SemVer tag:
+#   git tag -a 1.0.1 -m "Riffle 1.0.1" && git push origin 1.0.1
+# This runs the tests, then publishes a GitHub Release with auto-generated notes.
+# SwiftPM only needs the tag to resolve `from: "x.y.z"`; the Release is for the changelog.
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write   # required to create the Release
+
+jobs:
+  release:
+    # ponytail: macos-latest currently provides Xcode 16 / Swift 6, which the
+    # Package.swift (tools 6.0, language mode v6) requires. Pin a macos-NN image
+    # if a future default regresses the toolchain.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test
+        run: swift test
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "Riffle $GITHUB_REF_NAME" --generate-notes

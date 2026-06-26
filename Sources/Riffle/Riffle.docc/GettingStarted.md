@@ -8,7 +8,7 @@ In Xcode choose *File ▸ Add Package Dependencies…* and enter the repository 
 or add it to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/Appgineering/Riffle.git", from: "1.0.0")
+.package(url: "https://github.com/kempsu/Riffle.git", from: "1.0.0")
 ```
 
 Then add `"Riffle"` to your target's dependencies.
