@@ -1,19 +1,39 @@
 # Riffle
 
-A widget-style rotating card stack for SwiftUI. Riffle shows one card at a time
-from a prioritized set, auto-rotates between them, lets the user swipe vertically
-to cycle, and animates each change with a smooth, configurable transition — all
-inside your app.
+**An Apple Smart Stack, for the inside of your app.**
 
-It is content-agnostic: use the built-in card layout or supply your own views.
-Typical uses are "Upgrade to Pro" upsells, "Rate this app" prompts, feature tips,
-announcements, and seasonal offers.
+You know the Smart Stack on the Home Screen: a single slot that holds a deck of
+widgets, keeps the most relevant one on top, rotates through them on its own, and
+lets you flick up and down to see the rest. Riffle brings that exact behavior
+*inside* your SwiftUI app — one card slot that surfaces your highest-priority
+card, auto-rotates through the eligible ones, and lets the user swipe vertically
+to cycle, complete with the peeking deck and a configurable flip transition.
+
+![Riffle in action](Examples/example.gif)
+
+It is content-agnostic: use the built-in card layout or drop in your own views.
+Typical cards are "Upgrade to Pro" upsells, "Rate this app" prompts, feature
+tips, announcements, and seasonal offers — the things you'd otherwise scatter
+across the UI as one-off banners.
+
+Like the system Smart Stack, the card on top is the one that matters most right
+now. The difference: *you* define "most" with `priority` and `shown(when:)`, so
+the rotation is deterministic and testable instead of a black box.
 
 - Pure SwiftUI, zero dependencies
 - Swift 6 language mode, strict-concurrency clean
 - Accessible by default: VoiceOver adjustable, honors Reduce Motion, Dynamic Type friendly
 
-![Riffle in action](Examples/example.gif)
+## How it maps to the Smart Stack
+
+| Smart Stack | Riffle |
+|-------------|--------|
+| A stack of widgets in one slot | A `RiffleStack` of cards in one `frame` |
+| Most relevant widget on top | Highest `priority`, eligible card on top |
+| Smart Rotate through the day | `riffleAutoAdvance(.seconds(_:))` |
+| Swipe up/down to flip through | Vertical drag to cycle cards |
+| Widgets peeking at the edges | `riffleStackDepth(_:)` deck peek |
+| Widget shows only when relevant | `shown(when:)` eligibility gate |
 
 ## Requirements
 
@@ -77,7 +97,8 @@ struct PromosView: View {
 
 Cards are filtered by eligibility (`shown(when:)`) and ordered by priority,
 highest first, preserving declaration order within a priority. When no card is
-eligible, the stack renders nothing.
+eligible, the stack renders nothing — zero size, no chrome — so it's safe to
+leave in a layout permanently and let eligibility decide whether anything shows.
 
 A runnable iOS demo app lives in [`Examples/RiffleDemo`](Examples/RiffleDemo),
 with live controls for eligibility, looping, auto-advance, stack depth, and
@@ -166,6 +187,9 @@ the view tree.
 | `riffleStackDepth(_:)` | `2` | How many cards peek behind the front, like a deck. `0` shows only the front. |
 | `riffleCardShadow(_:)` | `true` | Draw a soft drop shadow under the front card. |
 
+Auto-advance pauses while the scene is inactive and stops when the stack leaves
+the screen, so it never burns a timer in the background.
+
 ### Priority
 
 `RifflePriority` is backed by an `Int` raw value, so you can define your own
@@ -192,12 +216,14 @@ but there is no remote-driven manual navigation in v1.
 
 Planned for later releases:
 
-- Data-driven `RiffleStack(_:content:)` over a collection or `RiffleItem`.
+- Data-driven `RiffleStack(_:content:)` over a collection of `RiffleItem`.
 - Frequency capping and snooze ("show at most N times", "remind me later") with a pluggable persistence store.
 - Lifecycle callbacks: `onShow`, `onDismiss`, `onSelect`.
 - A horizontal transition option and a configurable swipe axis.
-- Relevance signals beyond static priority, such as recency and last-shown time.
+- Relevance signals beyond static priority, such as recency and last-shown time — closing the loop on true Smart Rotate.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
+</content>
+</invoke>
