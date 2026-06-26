@@ -13,6 +13,8 @@ announcements, and seasonal offers.
 - Swift 6 language mode, strict-concurrency clean
 - Accessible by default: VoiceOver adjustable, honors Reduce Motion, Dynamic Type friendly
 
+![Riffle in action](Examples/example.gif)
+
 ## Requirements
 
 | Platform | Minimum |
