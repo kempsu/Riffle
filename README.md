@@ -2,7 +2,12 @@
 
 **An Apple Smart Stack, for the inside of your app.**
 
+[![Release](https://img.shields.io/github/v/release/kempsu/Riffle?label=release&color=1f6feb)](https://github.com/kempsu/Riffle/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/kempsu/Riffle/ci.yml?branch=main&label=CI)](https://github.com/kempsu/Riffle/actions/workflows/ci.yml)
 [![Documentation](https://img.shields.io/badge/docs-DocC-1f6feb)](https://kempsu.github.io/Riffle/documentation/riffle/)
+[![Swift 6](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS-blue)](#requirements)
+[![License: MIT](https://img.shields.io/github/license/kempsu/Riffle?color=blue)](LICENSE)
 
 You know the Smart Stack on the Home Screen: a single slot that holds a deck of
 widgets, keeps the most relevant one on top, rotates through them on its own, and
