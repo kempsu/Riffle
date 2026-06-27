@@ -1,6 +1,9 @@
 .DS_Store
 /.build
 /Packages
+# Library package: only generated when building docs (RIFFLE_BUILD_DOCS=1); never committed.
+/Package.resolved
+/docs
 xcuserdata/
 DerivedData/
 .swiftpm/configuration/registries.json

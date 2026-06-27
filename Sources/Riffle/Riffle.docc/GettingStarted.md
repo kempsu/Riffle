@@ -110,7 +110,7 @@ Three things to get right with a custom view:
 - Fill the frame with `maxWidth`/`maxHeight: .infinity`, or the view floats
   inside the card slot instead of filling it.
 - Apply your own corner radius and `clipShape` — the stack won't round it for you.
-- ``SwiftUI/View/riffleCardShadow(_:)`` traces the view's rendered alpha, so give
+- `riffleCardShadow(_:)` traces the view's rendered alpha, so give
   it an opaque background and clip shape for the shadow to read as a card rather
   than outlining its text.
 
@@ -119,14 +119,14 @@ Three things to get right with a custom view:
 Every option is set with a modifier, so settings compose and can live at any
 level of the view tree:
 
-- ``SwiftUI/View/riffleTransition(_:)`` — the front-card animation. `.flip` is the default.
-- ``SwiftUI/View/riffleAutoAdvance(_:)`` — rotate every *n* seconds, or `.off`.
-- ``SwiftUI/View/rifflePausesOnInteraction(_:)`` — hold the timer while the user interacts.
-- ``SwiftUI/View/riffleLoops(_:)`` — wrap around the ends, or stop.
-- ``SwiftUI/View/riffleIndicator(_:)`` — the page indicator style.
-- ``SwiftUI/View/riffleIndicatorTint(_:)`` — the indicator color; `nil` adapts to the content.
-- ``SwiftUI/View/riffleStackDepth(_:)`` — how many cards peek behind the front.
-- ``SwiftUI/View/riffleCardShadow(_:)`` — draw a soft drop shadow under the front card.
+- `riffleTransition(_:)` — the front-card animation. `.flip` is the default.
+- `riffleAutoAdvance(_:)` — rotate every *n* seconds, or `.off`.
+- `rifflePausesOnInteraction(_:)` — hold the timer while the user interacts.
+- `riffleLoops(_:)` — wrap around the ends, or stop.
+- `riffleIndicator(_:)` — the page indicator style.
+- `riffleIndicatorTint(_:)` — the indicator color; `nil` adapts to the content.
+- `riffleStackDepth(_:)` — how many cards peek behind the front.
+- `riffleCardShadow(_:)` — draw a soft drop shadow under the front card.
 
 ## Accessibility
 

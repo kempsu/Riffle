@@ -19,3 +19,11 @@ let package = Package(
     ],
     swiftLanguageModes: [.v6]
 )
+
+// The DocC plugin is only used to build the documentation site (see .github/workflows/docs.yml).
+// Gate it behind an env var so it never enters consumers' dependency graphs.
+if Context.environment["RIFFLE_BUILD_DOCS"] != nil {
+    package.dependencies += [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
+    ]
+}

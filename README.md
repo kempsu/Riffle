@@ -2,6 +2,8 @@
 
 **An Apple Smart Stack, for the inside of your app.**
 
+[![Documentation](https://img.shields.io/badge/docs-DocC-1f6feb)](https://kempsu.github.io/Riffle/documentation/riffle/)
+
 You know the Smart Stack on the Home Screen: a single slot that holds a deck of
 widgets, keeps the most relevant one on top, rotates through them on its own, and
 lets you flick up and down to see the rest. Riffle brings that exact behavior
@@ -34,6 +36,15 @@ the rotation is deterministic and testable instead of a black box.
 | Swipe up/down to flip through | Vertical drag to cycle cards |
 | Widgets peeking at the edges | `riffleStackDepth(_:)` deck peek |
 | Widget shows only when relevant | `shown(when:)` eligibility gate |
+
+## Demo
+
+The animation above is the bundled demo app. [`Examples/RiffleDemo`](Examples/RiffleDemo)
+is a runnable iOS app with live controls for every option — eligibility, looping,
+auto-advance interval, stack depth, transition, indicator, card shadow, and runtime
+card insertion — so you can feel how the stack behaves before wiring it into your own
+project. Open `Examples/RiffleDemo/RiffleDemo.xcodeproj` and run; it consumes Riffle
+straight from this package.
 
 ## Requirements
 
@@ -99,10 +110,6 @@ Cards are filtered by eligibility (`shown(when:)`) and ordered by priority,
 highest first, preserving declaration order within a priority. When no card is
 eligible, the stack renders nothing — zero size, no chrome — so it's safe to
 leave in a layout permanently and let eligibility decide whether anything shows.
-
-A runnable iOS demo app lives in [`Examples/RiffleDemo`](Examples/RiffleDemo),
-with live controls for eligibility, looping, auto-advance, stack depth, and
-transition.
 
 ### Styling cards
 
@@ -199,6 +206,20 @@ levels alongside `.low`, `.normal`, and `.high`:
 extension RifflePriority {
     static let critical = RifflePriority(rawValue: 1500)
 }
+```
+
+## Documentation
+
+The sections above are a quick start. The full, browsable API reference — every
+type, modifier, and the Getting Started guide — is hosted on GitHub Pages:
+
+**[kempsu.github.io/Riffle/documentation/riffle](https://kempsu.github.io/Riffle/documentation/riffle/)**
+
+It's generated from the in-source DocC catalog and republished automatically on
+every push to `main`. To build it locally:
+
+```sh
+RIFFLE_BUILD_DOCS=1 swift package --disable-sandbox preview-documentation --target Riffle
 ```
 
 ## Accessibility

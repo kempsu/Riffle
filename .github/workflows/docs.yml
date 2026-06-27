@@ -1,0 +1,63 @@
+name: Docs
+
+# Builds the DocC site and publishes it to GitHub Pages (free for public repos)
+# at https://kempsu.github.io/Riffle/documentation/riffle/.
+# One-time setup: repo Settings > Pages > Source = "GitHub Actions" (the build
+# step below also tries to enable this automatically via `enablement: true`).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress run mid-publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-latest   # the target imports SwiftUI, so DocC must build on macOS
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Build DocC site
+        env:
+          RIFFLE_BUILD_DOCS: "1"   # opt the DocC plugin into Package.swift for this run
+        # --hosting-base-path must equal the repo name: Pages serves a project site
+        # under https://<user>.github.io/Riffle/.
+        run: |
+          swift package --allow-writing-to-directory docs \
+            generate-documentation \
+            --target Riffle \
+            --include-extended-types \
+            --disable-indexing \
+            --transform-for-static-hosting \
+            --hosting-base-path Riffle \
+            --output-path docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

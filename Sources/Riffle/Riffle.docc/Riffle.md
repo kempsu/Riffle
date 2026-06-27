@@ -39,9 +39,17 @@ eligible, the stack renders nothing.
 - ``RiffleStack``
 - ``RiffleCard``
 
-### Ordering
+### Cards
+
+- ``RiffleStandardCard``
+- ``RiffleCardBackground``
+- ``RiffleCardAccent``
+- ``RiffleCardAccessory``
+
+### Ordering and eligibility
 
 - ``RifflePriority``
+- ``RiffleItem``
 
 ### Appearance and behavior
 
