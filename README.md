@@ -198,6 +198,7 @@ the view tree.
 | `riffleIndicatorTint(_:)` | adaptive | Indicator color. `nil` adapts to the content behind it. |
 | `riffleStackDepth(_:)` | `2` | How many cards peek behind the front, like a deck. `0` shows only the front. |
 | `riffleCardShadow(_:)` | `true` | Draw a soft drop shadow under the front card. |
+| `riffleAllowsSingleCardGestures(_:)` | `false` | Let a single-card stack respond to manual swipes. Off by default, since one card has nowhere to go. |
 
 Auto-advance pauses while the scene is inactive and stops when the stack leaves
 the screen, so it never burns a timer in the background.

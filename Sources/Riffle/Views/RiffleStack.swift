@@ -100,11 +100,16 @@ public struct RiffleStack: View {
                         loops: configuration.loops,
                         reduceMotion: reduceMotion,
                         cardShadow: configuration.cardShadow,
+                        allowsSingleCardGestures: configuration.allowsSingleCardGestures,
                         coordinator: coordinator
                     )
                     .accessibilityElement(children: .combine)
                     .accessibilityValue(Text("Card \(i + 1) of \(count)"))
                     .accessibilityAdjustableAction { direction in
+                        // A lone card has nowhere to navigate; mirror the drag gesture and
+                        // ignore VoiceOver's adjust unless single-card gestures are opted in,
+                        // so a single card never flips to itself on any input path.
+                        guard count > 1 || configuration.allowsSingleCardGestures else { return }
                         switch direction {
                         case .increment:
                             coordinator.goToNext()
@@ -164,6 +169,7 @@ private struct RiffleDeck: View {
     let loops: Bool
     let reduceMotion: Bool
     let cardShadow: Bool
+    let allowsSingleCardGestures: Bool
     let coordinator: RiffleCoordinator
 
     /// Live drag translation, clamped to one page of travel.
@@ -174,6 +180,12 @@ private struct RiffleDeck: View {
 
     private var settle: Animation {
         reduceMotion ? .easeInOut(duration: 0.25) : .spring(response: 0.42, dampingFraction: 0.78)
+    }
+
+    /// Manual swipe is active with two or more cards; with a single card it is only
+    /// active when explicitly opted in, since there is nowhere else to go.
+    private var gesturesEnabled: Bool {
+        ordered.count > 1 || allowsSingleCardGestures
     }
 
     private var style: InteractiveStyle {
@@ -220,7 +232,21 @@ private struct RiffleDeck: View {
                 .frame(width: width, height: page, alignment: .top)
                 .clipped()
                 .contentShape(Rectangle())
-                .gesture(dragGesture(page: page))
+                // A lone card has nowhere to navigate, so by default the drag is masked
+                // off (and falls through to any parent scroll view) instead of flipping
+                // the card to itself. The gesture stays structurally attached either way,
+                // so the deck's @State and animations are never reset.
+                .gesture(dragGesture(page: page), including: gesturesEnabled ? .all : .subviews)
+                // ponytail: if the eligible set shrinks to one card mid-drag, masking the
+                // recognizer can drop its onEnded, stranding `dragging`/`isInteracting`
+                // (which silently keeps auto-advance paused). Reset defensively. Always
+                // attached, so it never changes the deck's structure.
+                .onChange(of: gesturesEnabled) { _, enabled in
+                    guard !enabled, dragging else { return }
+                    drag = 0
+                    dragging = false
+                    coordinator.endInteraction(translation: 0)
+                }
                 .modifier(MinimumSizeWarning(size: geo.size))
         }
     }

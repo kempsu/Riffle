@@ -16,4 +16,8 @@ struct RiffleConfiguration {
     var stackDepth: Int = 2
     /// Whether the front card casts a soft drop shadow.
     var cardShadow: Bool = true
+    /// Whether a single-card stack still responds to manual swipe gestures. A stack
+    /// with one card has nowhere to navigate, so by default a swipe is ignored
+    /// rather than flipping the card to itself.
+    var allowsSingleCardGestures: Bool = false
 }

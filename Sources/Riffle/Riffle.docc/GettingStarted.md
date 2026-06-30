@@ -127,6 +127,7 @@ level of the view tree:
 - `riffleIndicatorTint(_:)` — the indicator color; `nil` adapts to the content.
 - `riffleStackDepth(_:)` — how many cards peek behind the front.
 - `riffleCardShadow(_:)` — draw a soft drop shadow under the front card.
+- `riffleAllowsSingleCardGestures(_:)` — let a lone card respond to swipes; off by default, since one card has nowhere to go.
 
 ## Accessibility
 

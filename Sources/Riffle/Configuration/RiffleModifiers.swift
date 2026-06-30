@@ -44,4 +44,12 @@ public extension View {
     func riffleCardShadow(_ enabled: Bool) -> some View {
         transformEnvironment(\.riffleConfiguration) { $0.cardShadow = enabled }
     }
+
+    /// Whether a single-card stack responds to manual swipe gestures. A stack with
+    /// one card has nowhere to go, so by default the swipe is ignored (the card no
+    /// longer flips to itself). Pass `true` to keep the drag active. Defaults to
+    /// `false`. Has no effect once a stack has two or more cards.
+    func riffleAllowsSingleCardGestures(_ allows: Bool) -> some View {
+        transformEnvironment(\.riffleConfiguration) { $0.allowsSingleCardGestures = allows }
+    }
 }
